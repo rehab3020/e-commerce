@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:e_commerce/modules/validation_screens/Login.dart';
-
 import 'dart:math' as math;
 
 class SplashScreen extends StatefulWidget {
@@ -26,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
       },
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
