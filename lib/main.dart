@@ -1,4 +1,4 @@
-import 'package:e_commerce/modules/validation_screens/Splash%20Screen.dart';
+import 'package:e_commerce/modules/validation_screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

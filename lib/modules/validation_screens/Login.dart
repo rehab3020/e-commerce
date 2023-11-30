@@ -107,7 +107,10 @@ class _LoginState extends State<Login> {
                 keyboardType: TextInputType.text,
                 obscureText: isobscureText,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock_outline),
+                  prefixIcon: Icon(
+                    Icons.lock_outline,
+                    color: Colors.grey,
+                  ),
                   hintText: 'Password',
                   hintStyle: TextStyle(color: Colors.grey),
                   border: OutlineInputBorder(),

@@ -1,3 +1,4 @@
+import 'package:e_commerce/layout/home.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/modules/validation_screens/Login.dart';
 import 'dart:math' as math;
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (_) => const Login(),
+            builder: (_) => const Home(),
           ),
           (route) => false,
         );
