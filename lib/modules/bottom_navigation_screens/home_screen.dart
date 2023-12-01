@@ -1,8 +1,7 @@
+import 'package:e_commerce/components/components.dart';
 import 'package:e_commerce/modules/category_screens/Product_detail.dart';
 import 'package:e_commerce/modules/category_screens/category_type.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,8 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final CarouselController _carouselController = CarouselController();
-  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -67,122 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          CarouselSlider.builder(
-            carouselController: _carouselController,
-            itemCount: 5,
-            itemBuilder: (context, index, realIndex) {
-              return Stack(
-                children: [
-                  Image.asset(
-                    'assets/images/Promotion Image.png',
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Super Flash Sale',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Text(
-                          '50% Off',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(7.0)),
-                              child: const Center(
-                                  child: Text(
-                                '08',
-                                style: TextStyle(
-                                  color: Color(0xff223263),
-                                  fontSize: 15,
-                                ),
-                              )),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(7.0)),
-                              child: const Center(
-                                  child: Text(
-                                '08',
-                                style: TextStyle(
-                                  color: Color(0xff223263),
-                                  fontSize: 15,
-                                ),
-                              )),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(7.0)),
-                              child: const Center(
-                                  child: Text(
-                                '08',
-                                style: TextStyle(
-                                  color: Color(0xff223263),
-                                  fontSize: 15,
-                                ),
-                              )),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            },
-            options: CarouselOptions(
-              viewportFraction: 0.85,
-              enlargeCenterPage: true,
-              height: MediaQuery.of(context).size.width * 0.55,
-              autoPlay: true,
-            ),
-          ),
-          SmoothPageIndicator(
-            controller: _pageController,
-            count: 5,
-            effect: const ScaleEffect(
-              dotWidth: 7.0,
-              dotHeight: 7.0,
-              dotColor: Color(0xFFEBF0FF),
-              activeDotColor: Color(0xFF40BFFF),
-            ),
-            onDotClicked: (index) {
-              _carouselController.animateToPage(index);
-            },
+          const BannerWidget(
+            urlImage: 'assets/images/Promotion Image.png',
+            textOffer: 'Super Flash Sale 50% Off',
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 10.0),
@@ -238,78 +122,34 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const Text('Flash Sale',
                         style: TextStyle(
-                          color: Color(0xFF223263),
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                        )),
+                            color: Color(0xFF223263),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17.0)),
                     TextButton(
                         onPressed: () {},
                         child: const Text(
                           'See more ',
-                          style: TextStyle(color: Color(0xFF40BFFF)),
+                          style: TextStyle(color: Color(0xFF40BFFF),fontWeight: FontWeight.w700),
                         ))
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.38,
+                  height: MediaQuery.of(context).size.height * 0.35,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.43,
-                            child: Card(
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                        'assets/images/image Product.png',
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.18,
-                                        fit: BoxFit.cover),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    const Text('FS - Nike Air Max 270 React',
-                                        style: TextStyle(
-                                          color: Color(0xFF223263),
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    const Text(
-                                      '\$299,43',
-                                      style:
-                                          TextStyle(color: Color(0xFF40BFFF)),
-                                    ),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    const Row(
-                                      children: [
-                                        Text('\$534,33',
-                                            style: TextStyle(
-                                              color: Color(0xFF9098B1),
-                                            )),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text('\$24% Off',
-                                            style: TextStyle(
-                                              color: Color(0xFFFB7181),
-                                            )),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                      itemBuilder: (context, index) => GestureDetector(
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ProductDetail(),
                               ),
+                            ),
+                            child: productItem(
+                              context: context,
+                              uil: 'assets/images/image Product.png',
+                              nameOfProduct: 'Nike Air Max 270 React ENG',
+                              price: 299.43,
+                              oldPrice: 534.33,
+                              discountPercentage: 24,
                             ),
                           ),
                       separatorBuilder: (context, index) => const SizedBox(
@@ -335,16 +175,49 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.38,
+                  height: MediaQuery.of(context).size.height * 0.35,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => GestureDetector(
-                            onTap: () =>
-                                Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ProductDetail(),
-                            )),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ProductDetail(),
+                          ),
+                        ),
+                        child: productItem(
+                              context: context,
+                              uil: 'assets/images/image Product.png',
+                              nameOfProduct: 'Nike Air Max 270 React ENG',
+                              price: 299.43,
+                              oldPrice: 534.33,
+                              discountPercentage: 24,
+                            ),
+                      ),
+                      separatorBuilder: (context, index) => const SizedBox(
+                            width: 10.0,
+                          ),
+                      itemCount: 10),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: BannerWidget(
+                      urlImage: 'assets/images/image 51.png',
+                      textOffer: 'Recommended Product',
+                      isIndicator: false,
+                      isThereProductSizes: false),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.81,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 8.0),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.43,
+                              width: MediaQuery.of(context).size.width * 0.48,
                               child: Card(
                                 color: Colors.white,
                                 child: Padding(
@@ -370,33 +243,71 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const Text('FS - Nike Air Max 270 React',
                                           style: TextStyle(
                                             color: Color(0xFF223263),
+                                            fontWeight: FontWeight.bold,
                                           ),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2),
+                                      // const Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.start,
+                                      //   children: [
+                                      //     Icon(
+                                      //       Icons.star,
+                                      //       color: Color(0xff6C70EB),
+                                      //     )
+                                      //   ],
+                                      // ),
+                                      const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFEBF0FF),
+                                              size: 20),
+                                        ],
+                                      ),
                                       const SizedBox(
-                                        height: 5.0,
+                                        height: 15.0,
                                       ),
                                       const Text(
                                         '\$299,43',
-                                        style:
-                                            TextStyle(color: Color(0xFF40BFFF)),
+                                        style: TextStyle(
+                                            color: Color(0xFF40BFFF),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(
                                         height: 5.0,
                                       ),
                                       const Row(
                                         children: [
-                                          Text('\$534,33',
-                                              style: TextStyle(
-                                                color: Color(0xFF9098B1),
-                                              )),
+                                          Text(
+                                            '\$534,33',
+                                            style: TextStyle(
+                                              color: Color(0xFF9098B1),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
                                           SizedBox(
                                             width: 15,
                                           ),
-                                          Text('\$24% Off',
-                                              style: TextStyle(
-                                                color: Color(0xFFFB7181),
-                                              )),
+                                          Text(
+                                            '\$24% Off',
+                                            style: TextStyle(
+                                              color: Color(0xFFFB7181),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
                                         ],
                                       )
                                     ],
@@ -405,376 +316,112 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                            width: 10.0,
+                          Expanded(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.46,
+                              child: Card(
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                          'assets/images/image Product.png',
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.4,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.18,
+                                          fit: BoxFit.cover),
+                                      const SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      const Text('FS - Nike Air Max 270 React',
+                                          style: TextStyle(
+                                            color: Color(0xFF223263),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2),
+                                      // const Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.start,
+                                      //   children: [
+                                      //     Icon(
+                                      //       Icons.star,
+                                      //       color: Color(0xff6C70EB),
+                                      //     )
+                                      //   ],
+                                      // ),
+                                      const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFFFC833),
+                                              size: 20),
+                                          Icon(Icons.star,
+                                              color: Color(0xFFEBF0FF),
+                                              size: 20),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 15.0,
+                                      ),
+                                      const Text(
+                                        '\$299,43',
+                                        style: TextStyle(
+                                            color: Color(0xFF40BFFF),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      const Row(
+                                        children: [
+                                          Text(
+                                            '\$534,33',
+                                            style: TextStyle(
+                                              color: Color(0xFF9098B1),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          Text(
+                                            '\$24% Off',
+                                            style: TextStyle(
+                                              color: Color(0xFFFB7181),
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                      itemCount: 10),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(
-                      top: 10.0, end: 10.0, bottom: 10.0),
-                  child: Image.asset('assets/images/Promotion Image.png'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.46,
-                      child: Card(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset('assets/images/image Product.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.18,
-                                  fit: BoxFit.cover),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Text('FS - Nike Air Max 270 React',
-                                  style: TextStyle(
-                                    color: Color(0xFF223263),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2),
-                              // const Row(
-                              //   mainAxisAlignment: MainAxisAlignment.start,
-                              //   children: [
-                              //     Icon(
-                              //       Icons.star,
-                              //       color: Color(0xff6C70EB),
-                              //     )
-                              //   ],
-                              // ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFEBF0FF), size: 20),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15.0,
-                              ),
-                              const Text(
-                                '\$299,43',
-                                style: TextStyle(
-                                    color: Color(0xFF40BFFF),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    '\$534,33',
-                                    style: TextStyle(
-                                      color: Color(0xFF9098B1),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    '\$24% Off',
-                                    style: TextStyle(
-                                      color: Color(0xFFFB7181),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.46,
-                      child: Card(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset('assets/images/image Product.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.18,
-                                  fit: BoxFit.cover),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Text('FS - Nike Air Max 270 React',
-                                  style: TextStyle(
-                                    color: Color(0xFF223263),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2),
-                              // const Row(
-                              //   mainAxisAlignment: MainAxisAlignment.start,
-                              //   children: [
-                              //     Icon(
-                              //       Icons.star,
-                              //       color: Color(0xff6C70EB),
-                              //     )
-                              //   ],
-                              // ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFEBF0FF), size: 20),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15.0,
-                              ),
-                              const Text(
-                                '\$299,43',
-                                style: TextStyle(
-                                    color: Color(0xFF40BFFF),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    '\$534,33',
-                                    style: TextStyle(
-                                      color: Color(0xFF9098B1),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    '\$24% Off',
-                                    style: TextStyle(
-                                      color: Color(0xFFFB7181),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.46,
-                      child: Card(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset('assets/images/image Product.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.18,
-                                  fit: BoxFit.cover),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Text('FS - Nike Air Max 270 React',
-                                  style: TextStyle(
-                                    color: Color(0xFF223263),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2),
-                              // const Row(
-                              //   mainAxisAlignment: MainAxisAlignment.start,
-                              //   children: [
-                              //     Icon(
-                              //       Icons.star,
-                              //       color: Color(0xff6C70EB),
-                              //     )
-                              //   ],
-                              // ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFEBF0FF), size: 20),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15.0,
-                              ),
-                              const Text(
-                                '\$299,43',
-                                style: TextStyle(
-                                    color: Color(0xFF40BFFF),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    '\$534,33',
-                                    style: TextStyle(
-                                      color: Color(0xFF9098B1),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    '\$24% Off',
-                                    style: TextStyle(
-                                      color: Color(0xFFFB7181),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.46,
-                      child: Card(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset('assets/images/image Product.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.18,
-                                  fit: BoxFit.cover),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Text('FS - Nike Air Max 270 React',
-                                  style: TextStyle(
-                                    color: Color(0xFF223263),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2),
-                              // const Row(
-                              //   mainAxisAlignment: MainAxisAlignment.start,
-                              //   children: [
-                              //     Icon(
-                              //       Icons.star,
-                              //       color: Color(0xff6C70EB),
-                              //     )
-                              //   ],
-                              // ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFFFC833), size: 20),
-                                  Icon(Icons.star,
-                                      color: Color(0xFFEBF0FF), size: 20),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15.0,
-                              ),
-                              const Text(
-                                '\$299,43',
-                                style: TextStyle(
-                                    color: Color(0xFF40BFFF),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              const Row(
-                                children: [
-                                  Text(
-                                    '\$534,33',
-                                    style: TextStyle(
-                                      color: Color(0xFF9098B1),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    '\$24% Off',
-                                    style: TextStyle(
-                                      color: Color(0xFFFB7181),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                    itemCount: 2,
+                  ),
                 ),
               ],
             ),
