@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         radius: 36.0,
                       ),
                       separatorBuilder: (context, index) =>
-                      const SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                     ),
                   ),
                 );
@@ -105,10 +105,17 @@ class _HomeScreenState extends State<HomeScreen> {
               if (snapshot.hasError) {
                 return const Text("error");
               }
-              return BannerWidget(
-              urlImage: snapshot.data!.data.banners[1].image,
-              textOffer: 'Super Flash Sale 50% Off',
-            );},
+              if (!snapshot.hasData) {
+                return const Text("no data");
+              }
+              if (snapshot.hasData) {
+                return BannerWidget(
+                  urlImage: snapshot.data!.data.banners[1].image,
+                  textOffer: 'Super Flash Sale 50% Off',
+                );
+              }
+              return Container();
+            },
             future: homeData,
           ),
           //all widget
@@ -189,39 +196,46 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     ),
                     //   );
                     // }
-                    return SizedBox(
-                      height: 100,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => GestureDetector(
-                          onTap: () =>
-                              Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => CategoryType(
-                                categoryId: snapshot.data!.data.data[index].id,
-                                categoryName:
-                                    snapshot.data!.data.data[index].name),
-                          )),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 36.0,
-                                backgroundColor: const Color(0xFFEBF0FF),
-                                child: CircleAvatar(
-                                  radius: 35.0,
-                                  backgroundColor: Colors.white,
-                                  backgroundImage: NetworkImage(
-                                      snapshot.data!.data.data[index].image),
+                    if (!snapshot.hasData) {
+                      return const Text("no data");
+                    }
+                    if (snapshot.hasData) {
+                      return SizedBox(
+                        height: 100,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () =>
+                                Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CategoryType(
+                                  categoryId:
+                                      snapshot.data!.data.data[index].id,
+                                  categoryName:
+                                      snapshot.data!.data.data[index].name),
+                            )),
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 36.0,
+                                  backgroundColor: const Color(0xFFEBF0FF),
+                                  child: CircleAvatar(
+                                    radius: 35.0,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: NetworkImage(
+                                        snapshot.data!.data.data[index].image),
+                                  ),
                                 ),
-                              ),
-                              Text(snapshot.data!.data.data[index].name),
-                            ],
+                                Text(snapshot.data!.data.data[index].name),
+                              ],
+                            ),
                           ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 10),
+                          itemCount: snapshot.data!.data.data.length,
                         ),
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: 10),
-                        itemCount: snapshot.data!.data.data.length,
-                      ),
-                    );
+                      );
+                    }
+                    return Container();
                   },
                   future: categoryData,
                 ),
@@ -268,37 +282,44 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (snapshot.hasError) {
                       return const Text("error");
                     }
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.36,
-                      child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => GestureDetector(
-                                onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetail(
-                                        productID: snapshot
-                                            .data!.data.products[index].id),
+                    if (!snapshot.hasData) {
+                      return const Text("no data");
+                    }
+                    if (snapshot.hasData) {
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.36,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductDetail(
+                                          productID: snapshot
+                                              .data!.data.products[index].id),
+                                    ),
+                                  ),
+                                  child: productItem(
+                                    context: context,
+                                    uil: snapshot
+                                        .data!.data.products[index].image,
+                                    nameOfProduct: snapshot
+                                        .data!.data.products[index].name,
+                                    price: snapshot
+                                        .data!.data.products[index].price,
+                                    oldPrice: snapshot
+                                        .data!.data.products[index].oldPrice,
+                                    discountPercentage: snapshot
+                                        .data!.data.products[index].discount,
                                   ),
                                 ),
-                                child: productItem(
-                                  context: context,
-                                  uil:
-                                      snapshot.data!.data.products[index].image,
-                                  nameOfProduct:
-                                      snapshot.data!.data.products[index].name,
-                                  price:
-                                      snapshot.data!.data.products[index].price,
-                                  oldPrice: snapshot
-                                      .data!.data.products[index].oldPrice,
-                                  discountPercentage: snapshot
-                                      .data!.data.products[index].discount,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  width: 10.0,
                                 ),
-                              ),
-                          separatorBuilder: (context, index) => const SizedBox(
-                                width: 10.0,
-                              ),
-                          itemCount: 10),
-                    );
+                            itemCount: 10),
+                      );
+                    }
+                    return Container();
                   },
                   future: homeData,
                 ),
@@ -344,37 +365,44 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (snapshot.hasError) {
                       return const Text("error");
                     }
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.36,
-                      child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => GestureDetector(
-                                onTap: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetail(
-                                        productID: snapshot
-                                            .data!.data.products[index].id),
+                    if (!snapshot.hasData) {
+                      return const Text("no data");
+                    }
+                    if (snapshot.hasData) {
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.36,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductDetail(
+                                          productID: snapshot
+                                              .data!.data.products[index].id),
+                                    ),
+                                  ),
+                                  child: productItem(
+                                    context: context,
+                                    uil: snapshot
+                                        .data!.data.products[index].image,
+                                    nameOfProduct: snapshot
+                                        .data!.data.products[index].name,
+                                    price: snapshot
+                                        .data!.data.products[index].price,
+                                    oldPrice: snapshot
+                                        .data!.data.products[index].oldPrice,
+                                    discountPercentage: snapshot
+                                        .data!.data.products[index].discount,
                                   ),
                                 ),
-                                child: productItem(
-                                  context: context,
-                                  uil:
-                                      snapshot.data!.data.products[index].image,
-                                  nameOfProduct:
-                                      snapshot.data!.data.products[index].name,
-                                  price:
-                                      snapshot.data!.data.products[index].price,
-                                  oldPrice: snapshot
-                                      .data!.data.products[index].oldPrice,
-                                  discountPercentage: snapshot
-                                      .data!.data.products[index].discount,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  width: 10.0,
                                 ),
-                              ),
-                          separatorBuilder: (context, index) => const SizedBox(
-                                width: 10.0,
-                              ),
-                          itemCount: 10),
-                    );
+                            itemCount: 10),
+                      );
+                    }
+                    return Container();
                   },
                   future: homeData,
                 ),
