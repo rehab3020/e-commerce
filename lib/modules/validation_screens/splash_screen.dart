@@ -1,4 +1,5 @@
 import 'package:e_commerce/layout/home.dart';
+import 'package:e_commerce/modules/validation_screens/Login.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           () {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (_) => const Home(),
+            builder: (_) => const Login(),
           ),
               (route) => false,
         );

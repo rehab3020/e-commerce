@@ -1,3 +1,4 @@
+import 'package:e_commerce/layout/home.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/modules/validation_screens/Login.dart';
 
@@ -159,7 +160,13 @@ class _SingUpState extends State<SingUp> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.95,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ),
+                    );
+                  },
                   height: 50,
                   color: const Color(0xff40BFFF),
                   child: const Text(
